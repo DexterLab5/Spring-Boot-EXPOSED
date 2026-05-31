@@ -10,7 +10,8 @@ class AuthenticationService(
     private val employeeRepository: EmployeeRepository,
     private val authenticationManager: AuthenticationManager,
     private val jwtTokenProvider: JwtTokenProvider,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    private val roleRepository: RoleRepository
 ) {
 
     fun isEmployeeValid(username: String, roles: List<String>): Boolean {
@@ -40,12 +41,15 @@ class AuthenticationService(
     }
 
     fun register(registerRequest: RegisterRequest): AuthResponse {
+
+        val employeeRole = roleRepository.findByRole("ROLE_EMPLOYEE")
+
         val newEmployee = Employee(
             username = registerRequest.username,
             email = registerRequest.email,
             password = passwordEncoder.encode(registerRequest.password)
                 ?: throw IllegalStateException("Password encoding failed"), // Crucial for security
-            roles = mutableSetOf(Role(role = "ROLE_EMPLOYEE")) // Assign a default role
+            roles = mutableSetOf(employeeRole) // Assign a default role
         )
 
         // 3. Save the new user to the database

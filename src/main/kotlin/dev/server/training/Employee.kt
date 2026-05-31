@@ -32,9 +32,9 @@ class Employee (
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "employee_authority",
+        name = "employee_role",
         joinColumns = [JoinColumn(name = "employee_id")],
-        inverseJoinColumns = [JoinColumn(name = "authority_id")]
+        inverseJoinColumns = [JoinColumn(name = "role_id")]
     )
     var roles: MutableSet<Role> = mutableSetOf()
 ) : UserDetails {
