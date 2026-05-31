@@ -30,17 +30,16 @@ class SecurityConfiguration(
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) } // Clear server-side sessions
             .authorizeHttpRequests { auth ->
                 auth
-//                    .requestMatchers("/api/auth/**").permitAll() // Allow public access to login/register endpoints
+                    .requestMatchers("/api/auth/**").permitAll() // Allow public access to login/register endpoints
 //                    .requestMatchers(HttpMethod.GET,"/api/todo").permitAll()
 //                    .requestMatchers(HttpMethod.POST, "/api/todo").hasRole("MANAGER")
 //                    .requestMatchers(HttpMethod.PUT, "/api/todo/{id}").hasRole("MANAGER")
 //                    .requestMatchers(HttpMethod.DELETE, "/api/todo/{id}").hasRole("ADMIN")
-//                    .anyRequest().authenticated()            // Lock down everything else
-                    .anyRequest().permitAll()
+                    .anyRequest().authenticated()            // Lock down everything else
             }
 
             // 2. CRITICAL STEP: Apply your filter right before the default standard auth filter
-//            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
 
         return http.build()
     }
