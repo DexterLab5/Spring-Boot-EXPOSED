@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: training
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/training
+    username: postgres
+    password: 1235
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+
+app:
+  jwt:
+    secret: "eb45bcfc-9d8a-4095-9488-4965e17226f4"
+    expiration-ms: 3600000 # 1 hour
