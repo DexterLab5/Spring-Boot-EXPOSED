@@ -23,7 +23,7 @@ class Todo {
     val employee: Employee? = null
 
     @Column(nullable = false, length = 100)
-    var title: String? = ""
+    var title: String = ""
 
     @Column(columnDefinition = "TEXT")
     var description: String? = ""

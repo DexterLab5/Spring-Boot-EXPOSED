@@ -27,6 +27,7 @@ class JwtAuthenticationFilter(
             filterChain.doFilter(request, response)
             return
         }
+
         val username = tokenProvider.getUsernameFromToken(token)
         val roles = tokenProvider.getRolesFromToken(token)
 

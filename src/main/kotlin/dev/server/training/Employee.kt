@@ -22,13 +22,13 @@ class Employee (
     val id: Int? = null, // -- val = const
 
     @Column(nullable = false, unique = true, length = 25)
-    var username: String = "",
+    private var username: String = "",
 
     @Column(nullable = false, unique = true, length = 25)
     var email: String = "",
 
     @Column(nullable = false, unique = true, length = 255)
-    var password: String = "",
+    private var password: String = "",
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -45,7 +45,7 @@ class Employee (
      */
     override fun getAuthorities(): Collection<GrantedAuthority> {
         return roles.map { role ->
-            SimpleGrantedAuthority("ROLE_${role.role}")
+            SimpleGrantedAuthority(role.role)
         }
     }
 
