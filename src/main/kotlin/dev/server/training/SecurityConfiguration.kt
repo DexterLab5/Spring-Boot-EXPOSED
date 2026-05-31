@@ -2,6 +2,7 @@ package dev.server.training
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
@@ -30,6 +31,10 @@ class SecurityConfiguration(
             .authorizeHttpRequests { auth ->
                 auth
                     .requestMatchers("/api/auth/**").permitAll() // Allow public access to login/register endpoints
+                    .requestMatchers(HttpMethod.POST, "/api/todo").hasRole("MANAGER")
+                    .requestMatchers(HttpMethod.PUT, "/api/todo/{id}").hasRole("MANAGER")
+                    .requestMatchers(HttpMethod.DELETE, "/api/todo/{id}").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/api/todo/{id}/complete").hasRole("EMPLOYEE")
                     .anyRequest().authenticated()            // Lock down everything else
             }
 
