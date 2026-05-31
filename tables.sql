@@ -20,22 +20,6 @@ CREATE TABLE employee_role (
 );
 
 
-INSERT INTO role (role) VALUES
-                            ('ROLE_ADMIN'),
-                            ('ROLE_MANAGER'),
-                            ('ROLE_EMPLOYEE');
-
-INSERT INTO employee (username, email, password) VALUES
-                                                     ('user_1', 'user1@example.com', '$2b$12$EXAMPLEHASH12345'),
-                                                     ('user_2', 'user2@example.com', '$2b$12$EXAMPLEHASH67890'),
-                                                     ('user_3', 'user3@example.com', '$2b$12$EXAMPLEHASH54321');
-
-INSERT INTO employee_role (employee_id, role_id) VALUES
-                                                     (1, 3), -- User 1 is an Employee
-                                                     (2, 2), -- User 2 is a Manager
-                                                     (2, 3), -- User 2 is also an Employee
-                                                     (3, 1); -- User 3 is an Admin
-
 CREATE TABLE todo (
                       id SERIAL PRIMARY KEY,
                       employee_id INT NOT NULL REFERENCES employee(id) ON DELETE CASCADE,
@@ -44,6 +28,21 @@ CREATE TABLE todo (
                       is_completed BOOLEAN DEFAULT FALSE,
                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+INSERT INTO role (role) VALUES
+                            ('ROLE_ADMIN'),
+                            ('ROLE_MANAGER'),
+                            ('ROLE_EMPLOYEE');
+
+-- Register 3 users
+
+INSERT INTO employee_role (employee_id, role_id) VALUES
+                                                     (1, 1),
+                                                     (2, 2),
+                                                     (3, 3),
+                                                     (4, 3),
+                                                     (5, 3);
 
 INSERT INTO todo (employee_id, title, description) VALUES
             (1, 'Setup environment', 'Install Docker and PostgreSQL locally.'),

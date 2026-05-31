@@ -16,6 +16,7 @@ class TodoController(private val todoService: TodoService) {
 
     @GetMapping
     fun getAllTodos(): ResponseEntity<List<Todo>> {
+        print("GETTING ALL TODOS")
         return ResponseEntity.ok(todoService.getAllTodos())
     }
 

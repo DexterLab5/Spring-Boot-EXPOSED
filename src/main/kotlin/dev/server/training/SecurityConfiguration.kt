@@ -34,7 +34,7 @@ class SecurityConfiguration(
                     .requestMatchers(HttpMethod.POST, "/api/todo").hasRole("MANAGER")
                     .requestMatchers(HttpMethod.PUT, "/api/todo/{id}").hasRole("MANAGER")
                     .requestMatchers(HttpMethod.DELETE, "/api/todo/{id}").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.PUT, "/api/todo/{id}/complete").hasRole("EMPLOYEE")
+                    .requestMatchers( "/api/todo/**").hasRole("EMPLOYEE")
                     .anyRequest().authenticated()            // Lock down everything else
             }
 
