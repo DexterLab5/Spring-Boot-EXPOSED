@@ -10,6 +10,8 @@ interface EmployeeRepository : JpaRepository<Employee, Int> {
     fun existsByUsername(username: String): Boolean
 
     // Navigates into the roles collection and selects just the 'name' field
-    @Query("SELECT r.title FROM Employee e JOIN e.authorities r WHERE e.username = :username")
+    @Query("SELECT r.role FROM Employee e JOIN e.roles r WHERE e.username = :username")
     fun findRoleNamesByUsername(@Param("username") username: String): Set<String>
+
+    fun findByUsername(username: String): Employee?
 }
