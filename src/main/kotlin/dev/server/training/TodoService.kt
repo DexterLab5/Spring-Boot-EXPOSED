@@ -36,9 +36,9 @@ class TodoService(
         todoRepository.deleteById(id)
     }
 
-    fun completeTodo(id: Int) {
+    fun completeTodo(id: Int): Todo {
         val todo = getTodoById(id)
         todo.isCompleted = true
-        todoRepository.save(todo)
+        return todoRepository.save(todo)
     }
 }
