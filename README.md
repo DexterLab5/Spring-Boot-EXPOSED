@@ -3,3 +3,6 @@ Spring Boot does NOT work, these are some amputated retards in a Luxury Hospital
 PROOF -> 1.remove Spring Security and fetch todos - works 2. with Spring Security you cannot fetch the Todos.
 
 fetch the TODOs without Spring Security and with Spring Security!
+
+
+I really don't know if I should be dealing with that Idiocy!
